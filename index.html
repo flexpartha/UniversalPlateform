@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="TsmMobile">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>TSM Universal Platform</title>
+
+    <!-- Bootstrap Core CSS -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+   <link rel="stylesheet" href="css/jquery-ui-1.8.9.custom/jquery-ui-1.8.9.custom.css">
+   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" />
+   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
+    
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+   <script src="js/jquery-ui-1.8.13.custom.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+   <script src="js/angular-route.min.js"></script>
+   <script src="js/tsmData.js"></script>
+   <script src="js/Authentication.js"></script>
+   <!--<script src="js/routing.js"></script>-->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
+ 
+    <!-- Custom CSS -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link href="css/Body.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style type="text/css">
+       table { border-collapse: collapse; }
+        tr,td, th { border: 1px solid #999; }
+        .col-1 { width: 200px; }
+        .col-2 { width: 300px; }
+    </style>
+
+</head>
+
+<body id="wholeBdy" ng-controller="loginCtrl">
+<input type="hidden" name="isLogin" id="isLogin">
+<input type="hidden" name="uName" id="uName">
+<input type="hidden" name="uPass" id="uPass">	
+	<div id="topHeader">
+    	<div id="topHeaderLeft">
+        	<div class="iconLeft">
+            	<a href="#"><img src="images/top_leftIcon.png" alt="" title="" id="Icon" ng-show="IsVisible"></a>
+            </div>
+            <div class="TsmlogoSection">
+            	<img src="images/Tsm_logo.png" alt="" title="Tsm Mobile">
+            </div>
+        </div>
+        	
+        <div id="topHeaderRight">
+        	<!-- <img src="images/bell.png" alt="" title=""> -->
+        </div>
+    </div>
+
+    <!-- Login Panel Starts Here -->
+  <div id="topLoginContainer" ng-show="IsVisible2">
+   <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-login">
+                <div class="loginImg">
+                    <img class="imgtsm img-responsive"  src="images/Tsm_logo4.png">
+                    <div class="row">
+                        
+                    </div>
+                    <hr>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form id="login-form"  role="form" style="display: block;">
+                                <div class="form-group">
+                                    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="{{Username1}}">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="{{Password1}}" >
+                                </div>
+                                <!-- <div class="form-group text-center">
+                                    <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
+                                    <label for="remember"> Remember Me</label>
+                                </div> -->
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-sm-offset-3">
+                                            <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In" ng-click="login();">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                 <!-- <div class="form-group" ng-show="IsVisible3">
+                                    <span style="font:Arial,Tahoma,Helvetica;font-size:14px; font-weight:bold;color:#ff0000;">{{errorMsg}}</span>
+                                </div>  -->
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+</div>
+    <!-- Login Panel Ends Here -->
+    <div id="wrapper" ng-show="IsVisible">
+    	<div id="popup">
+        	<ul><li><a href="#"><span class="splBackground3" onClick="navigationTR()">TRANSACTION</span></a></li></ul>
+            <ul><li><a href="#" onclick="navigation()">CONFIGURATION</a></li></ul>
+            <ul><li><a href="#">LOGOUT</a></li></ul>
+        </div>
+        <div id="configuration">
+        	<ul><li ><a href="#"><span class="splBackgroundCom" id="company1"  onClick="navigationCompany()">Company</span></a></li></ul>
+            <ul><li style="margin-right:45px;"><a href="#" onClick="navigationUser()" id="user1">User</a></li></ul>
+            <ul><li class="boderColor"><a href="#" id="entity1" onClick="navigationEntity()">Entity</a></li></ul>
+        </div>
+      <!-- Sidebar -->
+      <div  ng-controller="TsmDataCtrl">
+        <div id="sidebar-wrapper">
+        	
+            <div class = "panel-group" id="accordion">
+            <div class = "panel-default_background " id="firstPanel">
+      
+      <div class = "panel-heading">
+         <h4 class = "panel-title">
+            <a data-toggle = "collapse" data-parent ="#accordion" href ="#collapseOne" onClick="chartBgcolor();">
+              Chart of Accounts<span class="badge cstmargin_badges">{{message}}</span><i class="fa fa-refresh" ng-click="loadTransaction();show = 1"></i>
+            </a>
+         </h4>
+      </div>
+      
+      <div id ="collapseOne" class ="panel-collapse collapse in">
+         <!--<div class = "panel-body">
+            Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred 
+               nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+         </div>-->
+      </div>
+      
+   </div>
+   
+   <div class = "panel-default_background" id="secondPanel">
+      <div class = "panel-heading">
+         <h4 class = "panel-title">
+            <a data-toggle = "collapse" data-parent = "#accordion" href = "#collapseTwo" onClick="taxBgColor();">
+               Tax Codes<span class="badge txmargin_badges">{{message2}}</span><i class="fa fa-refresh" ng-click="loadtaxCodes();show = 2"></i>
+            </a>
+         </h4>
+      </div>
+
+      <div id = "collapseTwo" class = "panel-collapse collapse">
+         <!--<div class = "panel-body">
+            Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt 
+               sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+         </div>-->
+      </div>
+      
+   </div>
+   
+   <div class = "panel-default_background" id="thirdPanel">
+      <div class ="panel-heading">
+         <h4 class ="panel-title">
+            <a data-toggle = "collapse" data-parent = "#accordion" href = "#collapseThree" onClick="contactsBgcolor();">
+               Contacts<span class="badge chrtmargin_badges">{{message4}}</span><i class="fa fa-refresh" ng-click="loadcontacts();show = 3"></i>
+            </a>
+         </h4>
+      </div>
+     
+      <div id = "collapseThree" class = "panel-collapse collapse">
+         <!--<div class = "panel-body">
+            Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt 
+               sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+         </div>-->
+      </div>
+     
+   </div>
+   <div class = "panel-default_background" id="fourthPanel">
+      <div class = "panel-heading">
+         <h4 class = "panel-title">
+            <a data-toggle = "collapse" data-parent = "#accordion" href = "#collapseFour" onClick="invoiceBgcolor()">
+               Invoices<span class="badge invmargin_badges">{{message5}}</span><i class="fa fa-refresh" ng-click="loadInvoiceData();show=4"></i>
+            </a>
+         </h4>
+      </div>
+     
+      <div id ="collapseFour" class = "panel-collapse collapse">
+         <div class = "panel-body">
+           	<div id="invoiceSecInner">
+            	<form class="form-horizontal">
+                	<div class="form-group">
+                    	<label for="name" class="control-label">Start Date:</label>
+                        <div>
+                           <div class="input-group input-append date" id="dateRangePicker">
+                				      <input type="text" class="form-control" name="date" />
+                				      <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+            				      </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                    	<label for="name" class="control-label">End Date:</label>
+                        <div>
+                           <div class="input-group input-append date" id="dateRangePicker2">
+                				<input type="text" class="form-control" name="date" />
+                				<span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+            				</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    	<label for="name" class="control-label">FromInvoice:</label>
+                        <div>
+                           <input type="text" class="form-control" id="inputEmail" placeholder="From Invoice">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    	<label for="name" class="control-label">To Invoice:</label>
+                        <div>
+                           <input type="text" class="form-control" id="inputEmail" placeholder="To Invoice">
+                        </div>
+                    </div>
+                </form>
+            </div>
+         </div>
+      </div>
+     
+   </div>
+   
+ </div>
+</div>
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+     <div id="page-content-wrapper">
+        
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                                              
+     <div class="panel-group" id="accordion_TR">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title panel-title_CG">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseHtmlTR">Transaction</a>
+                </h4>
+            </div>
+            <div id="collapseHtmlTR" class="panel-collapse collapse in">
+                <div class="panel-body">
+                <!--TSM BODY SECTION STARTS HERE-->
+                  <div id="Tsm_Header">
+                  		<div id="TsmsourceArea">
+                        	<div id="TsmsourceLeft">
+                            	<span class="sourceTxt">SOURCE</span>
+                            	<div class="btn-group">
+                                <button type="button" data-toggle="dropdown" class="btn btn-default">{{SelectedItem}}</button>
+                                <button type="button" data-toggle="dropdown"  class="btn  dropdown-toggle"><span class="caret"></span></button>
+                                <ul class="dropdown-menu" ng-repeat="d in configurationdatas">
+                                    <li ng-repeat="ce in d.CompanyEntities"><a href="#" ng-click="dropboxitemselected(ce.Entity.Name)" >{{ce.Entity.Name}}</a></li>
+                                    <!-- <li><a href="#" data-value="MYOB">MYOB</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#" data-value="XEROB">XEROB</a></li>
+                                    <li><a href="#" data-value="XBOOKS">XBOOKS</a></li> -->
+                                </ul>
+                            </div>
+                            	 
+                            </div>
+                           
+                          <div id="TsmDestinationRight">
+                            	<span class="DestinationTxt">DESTINATION</span>
+                                <div class="btn-group  dropdown">
+                                <button type="button"data-toggle="dropdown" class="btn btn-default">{{SelectedItem2}}</button>
+                                <button type="button" data-toggle="dropdown"  class="btn  dropdown-toggle"><span class="caret"></span></button>
+                                <ul class="dropdown-menu"ng-repeat="d in configurationdatas">
+                                    <li ng-repeat="ce in d.CompanyEntities"><a href="#" ng-click="dropboxitemselected2(ce.Entity.Name)" data-value="{{ce.Entity.Name}}">{{ce.Entity.Name}}</a></li>
+                                    <!-- <li><a href="#">TSM</a></li>
+                                    <li><a href="#">MYOB</a></li>
+                                    <li class= "divider"></li>
+                                    <li><ahref="#">XEROB</a></li>
+                                    <li><a href="#">XBOOKS</a></li> -->
+                                </ul>
+                            </div>
+                         </div>
+                         <input type="image" src="images/post_Button.png" class="inputImg img-responsive">
+                        </div>
+                  </div>
+                 <!-----------------------------TSM BODY SECTION Ends HERE------------------>
+      <!----------------------------------------Left Accordion Start Here---------------------------->
+      <div id="accordionWholeBody">
+     <div id="AccordionBody">       
+     <ul class="nav nav-tabs tabSecBg">
+        <li class="active"><a data-toggle="tab" href="#sectionA">All<span class="badge allBadge">{{message3}}</span><i class="fa fa-refresh"></i></a></li>
+        <li><a data-toggle="tab" href="#sectionB">Error<span class="badge allBadge">0</span><i class="fa fa-refresh"></i></a></li>
+    </ul>
+    <div class="tab-content mytable">
+        <div id="sectionA" class="tab-pane fade in active">
+         <div>
+         <!---Chart Of Accounts-->
+            <table class="table table-hover table-striped" ng-show="show==1">
+                 <thead>
+                    <tr>
+                      <th><input type="checkbox" class="selectall"><span class="inputCheckbox"></span>Name</th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="transaction in transactiondatas" ng-switch on="isSelTransaction(transaction.Name)"   ng-click="Details(transaction.Name);">
+                	<tr >  
+                      <td ><input type="checkbox" class="checkbox1" style="padding-top:15px;"><span class="inputCheckbox"></span>{{transaction.Name}}</td>
+                    </tr>
+                     <tr ng-switch-when="true" style="background-color:#bcd2f4">
+                       <td><b>Name:</b>{{newDetail.NewName}}<br><b>AccountType:</b>{{newDetail.NewAccountType}}<br><b>AccountCode:</b>{{newDetail.NewAccountCode}}</td>
+                    </tr> 
+                </tbody>
+            </table>
+            <!---Taxes---->
+            <table class="table table-hover table-striped" ng-show="show==2">
+                 <thead>
+                    <tr>
+                      <th><input type="checkbox" class="selectall"><span class="inputCheckbox"></span>TAX</th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="taxcodes in transactiontaxDatas" ng-switch on="isSelTransactionTax(taxcodes.Name)" ng-click="TaxDetails(taxcodes.Name);">
+                	<tr >
+                      
+                      <td><input type="checkbox" class="checkbox1"><span class="inputCheckbox"></span>{{taxcodes.Name}}</td>
+                    </tr>
+                    <tr ng-switch-when="true" style="background-color:#bcd2f4">
+                       <td><b>Name:</b>{{newTaxDetail.NewTaxName}}<br><b>TaxType:</b>{{newTaxDetail.NewTaxType}}<br><b>TaxRate:</b>{{newTaxDetail.NewTaxRate}}</td>
+                    </tr> 
+                </tbody>
+            </table>
+            <!---Contacts---->
+            <table class="table table-hover table-striped" ng-show="show==3">
+                 <thead>
+                    <tr>
+                      <th><input type="checkbox" class="selectall"><span class="inputCheckbox"></span>ContactID</th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="contact in transactioncontactDatas" ng-switch on="isSelTransactionContact(contact.ContactID)" ng-click="ContactDetails(contact.ContactID);">
+                  <tr>   
+                      <td><input type="checkbox" class="checkbox1"><span class="inputCheckbox"></span>{{contact.ContactID}}</td>
+                    </tr>
+                    <tr ng-switch-when="true" style="background-color:#bcd2f4">
+                       <td><b>CONTACTID:</b>{{newContactDetail.NewContactid}}<br><b>ContactType:</b>{{newContactDetail.NewContactType}}<br><b>CompanyName:</b>{{newContactDetail.NewCompanyname}}<br><b>FIRSTNAME:</b>{{newContactDetail.FIRSTNAME}}<br><b>LASTNAME:</b>{{newContactDetail.LASTNAME}}<br><b>EMAIL:</b>{{newContactDetail.EMAIL}}<br><b>WEBSITE:</b>{{newContactDetail.WEBSITE}}<br><b>ABN:</b>{{newContactDetail.ABN}}</td>
+                    </tr> 
+                </tbody>
+            </table>
+           <!-- Invoices Table-->
+           <table class="table table-hover table-striped" ng-show="show==4"> 
+                <thead>
+                    <tr>
+                      <th><input type="checkbox" class="selectall"><span class="inputCheckbox"></span>Invoice</th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="invoice in tranInvoiceDatas" ng-switch on="isSelTransaction(invoice.Comment)"   ng-click="invoiceDetails(invoice.Comment);">
+                  <tr >  
+                      <td ><input type="checkbox" class="checkbox1" style="padding-top:15px;"><span class="inputCheckbox"></span>{{invoice.Comment}}</td>
+                    </tr>
+                     <tr ng-switch-when="true" style="background-color:#bcd2f4">
+                       <td><input type="checkbox" class="checkbox1" style="padding-top:15px;"><span class="inputCheckbox"></span>{{newInvoiceDetail.NewInvoiceDate}}{{newInvoiceDetail.NewInvoiceNumber}}{{newInvoiceDetail.NewInvoiceContact}}<b>Totals:</b>{{newInvoiceDetail.NewInvoiceLineItems}}</td>
+                    </tr> 
+                </tbody>
+           </table>
+        </div>
+        <!--<div >
+        	
+        </div>-->
+          <!--<img src="images/Rowstrip.png" width="450" height="337" class="stripImg">-->
+
+        </div>
+        
+        <div id="sectionB" class="tab-pane fade">
+           <!-- <h3>Error</h3>
+            <p>Vestibulum nec erat eu nulla rhoncus fringilla ut non neque. Vivamus nibh urna, ornare id gravida ut, mollis a magna. Aliquam porttitor condimentum nisi, eu viverra ipsum porta ut. Nam hendrerit bibendum turpis, sed molestie mi fermentum id. Aenean volutpat velit sem. Sed consequat ante in rutrum convallis. Nunc facilisis leo at faucibus adipiscing.</p>-->
+          <img src="images/Rowstrip.png" width="450" height="337" class="stripImg">  
+        </div>
+
+    </div>
+ </div>
+ <div id="AccordionBodyRght">
+ 	<div class="postSuccessBg"><span class="headTxt">Posted Successfully</span></div>
+    <img src="images/Rowstrip_second.png" width="490" height="343" class="stripImg1">
+ </div>
+ </div> 
+ 
+ 
+                </div>
+            </div>
+        </div>
+
+        <!--  <div class="panel-body" style="width:50%">
+                                       <div class="panel panel-group" >
+                                         <div class="panel panel-default">
+                                           <div class="panel-heading heading_CG">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" data-parent="#accordion" href="#editUser">Show Chart of Accounts Details</a>
+                                                 </h4>
+                                            </div>
+                                          </div>
+                                          <div id="editUser" class="panel-collapse collapse in">
+                                             <form>
+                                                <div class="form-group">
+                                                    <label for="contact">Name:</label>
+                                                    <label>{{newDetail.NewName}}</label><br>
+                                                    <input type="text" ng-model="newDetail.NewName">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="contact">Account Type:</label>
+                                                   
+                                                   <input type="text" ng-model="newDetail.NewAccountType">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="contact">Account Code:</label>
+                                                  
+                                                  <input type="text" ng-model="newDetail.NewAccountCode">
+                                                </div>
+                                             </form>
+                                          </div>
+                                       </div>
+          </div>  -->
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseBootstrap_MSG">Message</a>
+                </h4>
+            </div>
+            <div id="collapseBootstrap_MSG" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <p>Bootstrap is a powerful front-end framework for faster and easier web development. It is a collection of CSS and HTML conventions. <a href="http://www.tutorialrepublic.com/twitter-bootstrap-tutorial/" target="_blank">Learn more.</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+ 
+    <div class="panel-group" id="accordion_CG" style="display:none">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title panel-title_CG">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseHtml">Configuration</a>
+                </h4>
+            </div>
+            <div id="collapseHtml" class="panel-collapse collapse in">
+                <div class="panel-body">
+                <!-----------------------------TSM BODY SECTION STARTS HERE------------------>
+                  <div id="ConfigurationContent" ng-controller="CgcompanyCtrl">
+                  	 <div class="panel-group" id="company">
+                     	  <div class="panel panel-default">
+                          	  <div class="panel-heading heading_CG">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#companycollapseHtml">Company</a>
+                                     </h4>
+                               </div>
+                               <div id="companycollapseHtml" class="panel-collapse collapse in">
+                               		<div class="panel-body" ng-repeat="d in configurationdatas">
+                                    	<form>
+                                             <div class="form-group">
+                                                <label for="name">CompanyID</label>
+                                                <input type="text" class="form-control" id="cmdId" placeholder="{{d.CompanyID}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="name">Name</label>
+                                                <input type="text" class="form-control" id="nameTxt" placeholder="{{d.Name}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputEmail">Address</label>
+                                                <input type="text" class="form-control" id="address" placeholder="{{d.Address}}">
+                                            </div>
+                                           <div class="form-group">
+                                           		<label for="inputEmail">Email</label>
+                                                <input type="email" class="form-control" id="emailTxt" placeholder="{{d.Email}}">
+                                           </div>
+                                           <div class="form-group">
+                                           		<label for="contact">Contact No</label>
+                                                 <input type="text" class="form-control" id="nameTxt" placeholder="{{d.ContactNo}}">
+                                       </form>
+                                    </div>
+                               </div>
+                          </div>
+                     </div>
+                  </div>
+                  
+                  <div id="ConfigurationContent">
+                  	 <div class="panel-group" id="User" style="display:none">
+                     	  <div class="panel panel-default">
+                          	  <div class="panel-heading heading_CG">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#companycollapseUser">List of Users</a>
+                                     </h4>
+                               </div>
+                               <div id="companycollapseUser" class="panel-collapse collapse in">
+                               		<div class="panel-body">
+                                    	<div class="panel panel-group">
+                                        	<div class="panel panel-default">
+                                            	<div class="panel-heading heading_CG">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" data-parent="#accordion" href="#companycollapseUserList">List Of Users</a>
+                                                 </h4>
+                                           </div>
+                                            </div>
+                                            <div id="companycollapseUserList" class="panel-collapse collapse in">
+                                            	<table class="table table-hover table-striped" >
+                                             <thead>
+                                                <tr>
+                                                  <th>User Name</th>
+                                                  <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody ng-repeat="d in configurationdatas">
+                                                <tr ng-repeat="da in d.Users">
+                                                  <td>{{da.Username}}</td>
+                                                   <!-- <td>{{da.Password}}</td> -->
+                                                    <td><span class="glyphicon glyphicon-edit" title="Edit" ng-click="showEdit();editUser(da.UserID)"></span><span>&nbsp;</span>&#124;<span>&nbsp;</span><span class="glyphicon glyphicon-trash" title="Delete"></span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                            </div>
+                                        </div> 
+                                    	
+                                    </div>
+                               <!--      <div class="panel-body">
+                                    	<div class="panel panel-group">
+                                        	<div class="panel panel-default">
+                                            	<div class="panel-heading heading_CG">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" data-parent="#accordion" href="#companycollapseUserList1">User</a>
+                                                 </h4>
+                                           </div>
+                                            </div>
+                                            <div id="companycollapseUserList1" class="panel-collapse collapse in">
+                                            <div class="panel-body" ng-repeat="d in configurationdatas">
+                                            <form  ng-repeat="da in d.Users">
+                                            <div class="form-group">
+                                                <label for="contact">USER ID</label>
+                                                <input type="text" class="form-control" id="Uid" placeholder="{{da.UserID}}">
+                                           </div>
+                                            <div class="form-group">
+                                                <label for="name">User Name</label>
+                                                <input type="text" class="form-control" id="unameTxt" placeholder="{{da.Username}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputEmail">Password</label>
+                                                <input type="text" class="form-control" id="pwd" placeholder="{{da.Password}}">
+                                            </div>
+                                           <div class="form-group">
+                                           		<label for="inputEmail">CompanyID</label>
+                                                <input type="id" class="form-control" id="cmdId" placeholder="{{da.CompanyID}}">
+                                           </div>
+
+                                       </form>
+                                     </div>
+                                            </div>
+                                        </div>
+                                    	
+                                    </div> -->
+                                    <div class="panel-body" ng-show="IsVisible">
+                                       <div class="panel panel-group" >
+                                         <div class="panel panel-default">
+                                           <div class="panel-heading heading_CG">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" data-parent="#accordion" href="#editUser">Edit User</a>
+                                                 </h4>
+                                            </div>
+                                          </div>
+                                          <div id="editUser" class="panel-collapse collapse in">
+                                             <form>
+                                                <div class="form-group">
+                                                    <label for="contact">User Name</label>
+                                                    <input type="text" class="form-control" id="Uid" ng-model="newuser.UserName">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="contact">Password</label>
+                                                    <input type="text" class="form-control" id="Uid" ng-model="newuser.PassWord">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="contact">Confirm Password</label>
+                                                    <input type="text" class="form-control" id="Uid" ng-model="">
+                                                </div>
+                                             </form>
+                                          </div>
+                                       </div>
+                                    </div>
+                               </div>
+                          </div>
+                     </div>
+                  </div>
+                 <!-----------------------------TSM BODY SECTION Ends HERE------------------>
+      <!----------------------------------------Left Accordion Start Here---------------------------->
+ 				<div id="ConfigurationContent">
+                  	 <div class="panel-group" id="Entity" style="display:none">
+                     	  <div class="panel panel-default">
+                          	  <div class="panel-heading heading_CG">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#companycollapseEntityList2">List of Entities</a>
+                                     </h4>
+                               </div>
+                               <div id="companycollapseEntityList2" class="panel-collapse collapse in">
+                                  <div class="panel-body">
+                                    <div class="panel panel-group">
+                                       <table class="table table-hover table-striped">
+                                             <thead>
+                                                <tr>
+                                                  <th>Name</th>
+                                                  <th>Description</th>
+                                                  <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody ng-repeat="d in configurationdatas">
+                                                <tr ng-repeat="ce in d.CompanyEntities">
+                                                  <td>{{ce.Entity.Name}}</td>
+                                                   <td>{{ce.Entity.Description}}</td>
+                                                   <td><span class="glyphicon glyphicon-edit" title="Edit" ng-click="showEntity();editEntyties(ce.EntityID)"></span><span>&nbsp;</span>&#124;<span>&nbsp;</span><span class="glyphicon glyphicon-trash" title="Delete"></span></td>
+                                                </tr>
+                                                <!-- <tr>
+                                                  <td>TSM V6</td>
+                                                   <td>Australia's #1 Field Software Management</td>
+                                                    <td><span class="glyphicon glyphicon-edit"></span><span>&nbsp;</span>&#124;<span>&nbsp;</span><span class="glyphicon glyphicon-trash"></span></td>
+                                                </tr> -->
+                                            </tbody>
+                                        </table>
+                                        </div>
+                                    </div>
+
+                                      <div class="panel-body" ng-show="IsVisible2">
+                                       <div class="panel panel-group" >
+                                         <div class="panel panel-default">
+                                           <div class="panel-heading heading_CG">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" data-parent="#accordion" href="#editEntity">Edit Entity</a>
+                                                 </h4>
+                                            </div>
+                                          </div>
+                                          <div id="editEntity" class="panel-collapse collapse in">
+                                             <form>
+                                                <div class="form-group">
+                                                    <label for="contact">Name</label>
+                                                    <input type="text" class="form-control" id="Uid" ng-model="newEntity.NAME">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="contact">Description</label>
+                                                    <input type="text" class="form-control" id="Uid" ng-model="newEntity.DESCRIPTION">
+                                                </div>
+                                                <div class="form-group" ng-repeat="(key, value) in newEntity.ENTITYOPTION">
+                                                    <label for="contact">{{key}}</label>
+                                                    <div class="form-group" ng-repeat="(nkey, nvalue) in value">
+                                                    <label for="contact">{{nkey}}</label>
+                                                    <input type="text" class="form-control" id="Uid" ng-model="nvalue">
+                                                </div>
+                                                    <input type="text" class="form-control" id="Uid" ng-model="value">
+                                                </div>
+                                                <!-- <div class="form-group">
+                                                    <label for="contact">{{newEntity.ENTITYOPTION}}</label>
+                                                    <input type="text" class="form-control" id="Uid" ng-model="newEntity.ENTITYOPTION">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="contact">{{newEntity.ENTITYOPTION}}</label>
+                                                    <input type="text" class="form-control" id="Uid" ng-model="newEntity.ENTITYOPTION">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="contact">{{newEntity.ENTITYOPTION}}</label>
+                                                    <input type="text" class="form-control" id="Uid" ng-model="newEntity.ENTITYOPTION">
+                                                </div> -->
+                                             </form>
+                                          </div>
+                                       </div>
+                                    </div>
+                               		<div class="panel-body" style="display:none;">
+                                    	<div class="panel panel-group" ng-repeat="d in configurationdatas">
+                                        	 <form  ng-repeat="ce in d.CompanyEntities">
+                                            <!-- <div class="form-group">
+                                                <label for="contact">CompanyEntityID</label>
+                                                <input type="text" class="form-control" id="Uid" placeholder="{{ce.CompanyEntityID}}">
+                                           </div>
+                                            <div class="form-group">
+                                                <label for="name">TsmWinApiDriverBaseUrl</label>
+                                                <input type="text" class="form-control" id="unameTxt" placeholder="{{ce.TsmWinApiDriverBaseUrl}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputEmail">EntityOptions</label>
+                                                <input type="text" class="form-control" id="pwd" placeholder="{{ce.EntityOptions}}">
+                                            </div>
+                                           <div class="form-group">
+                                              <label for="inputEmail">CompanyID</label>
+                                                <input type="id" class="form-control" id="cmdId" placeholder="{{ce.CompanyID}}">
+                                           </div>
+                                            <div class="form-group">
+                                              <label for="inputEmail">EntityID</label>
+                                                <input type="id" class="form-control" id="cmdId" placeholder="{{ce.EntityID}}">
+                                           </div> -->
+                                           <div class="form-group">
+                                             <div class="panel panel-default">
+                                             <!--  <div class="panel-heading heading_CG">
+                                                <h4 class="panel-title">
+                                                  <a  data-parent="#accordion" href="">Entity</a>
+                                                </h4>
+                                            </div> -->
+                                             <div id="companycollapseEntity" class="panel-collapse collapse in">
+                                                <div class="panel-body">
+                                                   <div class="panel panel-group" >
+                                                      <!-- <form >
+
+                                                         <div class="form-group">
+                                                            <label for="contact">EntityID</label>
+                                                            <input type="text" class="form-control" id="entityid" placeholder="{{ce.Entity.Name}}">
+                                                          </div>
+                                                          <div class="form-group">
+                                                            <label for="contact">Descrption</label>
+                                                            <input type="text" class="form-control" id="entityid" placeholder="{{ce.Entity.Description}}">
+                                                          </div>
+                                                          <div class="form-group">
+                                                            <label for="contact">PipelineGuid</label>
+                                                            <input type="text" class="form-control" id="entityid" placeholder="{{ce.Entity.PipelineGuid}}">
+                                                          </div>
+                                                          <div class="form-group">
+                                                            <label for="contact">IsUsingTsmWinApiDriver</label>
+                                                            <input type="text" class="form-control" id="entityid" placeholder="{{ce.Entity.IsUsingTsmWinApiDriver}}">
+                                                          </div>
+                                                          <div class="form-group">
+                                                            <label for="contact">DefaultOptions</label>
+                                                            <input type="text" class="form-control" id="entityid" placeholder="{{ce.Entity.DefaultOptions}}">
+                                                          </div>
+                                                          <div class="form-group">
+                                                            <label for="contact">CompanyEntities</label>
+                                                            <input type="text" class="form-control" id="entityid" placeholder="{{ce.Entity.CompanyEntities}}">
+                                                          </div>
+                                                      </form> -->
+                                                   </div>
+                                                </div>
+                                             </div>
+                                            </div>
+                                           </div>
+                                       </form>
+                                            <!-- <div id="companycollapseEntityList2" class="panel-collapse collapse in">
+                                            	<table class="table table-hover table-striped">
+                                             <thead>
+                                                <tr>
+                                                  <th>Entity</th>
+                                                  <th>Description</th>
+                                                  <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                  <td>Xero</td>
+                                                   <td>Online Accounting Software for small Business</td>
+                                                    <td><span class="glyphicon glyphicon-edit"></span><span>&nbsp;</span>&#124;<span>&nbsp;</span><span class="glyphicon glyphicon-trash"></span></td>
+                                                </tr>
+                                                <tr>
+                                                  <td>TSM V6</td>
+                                                   <td>Australia's #1 Field Software Management</td>
+                                                    <td><span class="glyphicon glyphicon-edit"></span><span>&nbsp;</span>&#124;<span>&nbsp;</span><span class="glyphicon glyphicon-trash"></span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                            </div>
+                                        </div> -->
+                                    	
+                                    </div>
+                                    <!-- <div class="panel-body">
+                                    	<div class="panel panel-group">
+                                        	<div class="panel panel-default">
+                                            	<div class="panel-heading heading_CG">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" data-parent="#accordion" href="#companycollapseEntityList3">Entity</a>
+                                                 </h4>
+                                           </div>
+                                            </div>
+                                            <div id="companycollapseEntityList3" class="panel-collapse collapse in">
+                                            	<form>
+                                            <div class="form-group">
+                                                <label for="name">Entity</label>
+                                                <input type="text" class="form-control" id="nameTxt" placeholder="Xero">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputEmail">Description</label>
+                                                <input type="text" class="form-control" id="address" placeholder="Online Accounting Software for small Business ">
+                                           </div>
+                                           <div class="form-group">
+                                           		<label for="entityoption">Entity option</label>
+                                           </div>
+                                           
+                                           		<div id="EntityOption">
+                                                	<div class="form-group"> 
+                                                      <label for="Api">ApiEndpointUrl</label>
+                                                      <input type="text" class="form-control" id="address" placeholder="https://api.xero.com/api.xro/2.0/">
+                                                  </div>
+                                                  <div class="form-group"> 
+                                                      <label for="Api">ApiEndpointUrl</label>
+                                                      <input type="text" class="form-control" id="address" placeholder="https://api.xero.com/api.xro/2.0/">
+                                                  </div>
+                                                  <div class="form-group"> 
+                                                      <label for="Api">ApiEndpointUrl</label>
+                                                      <input type="text" class="form-control" id="address" placeholder="https://api.xero.com/api.xro/2.0/">
+                                                  </div>
+                                              </div>
+                                           
+                                       </form>
+
+                                            </div>
+                                        </div>
+                                    	
+                                    </div> -->
+                               </div>
+                          </div>
+                     </div>
+                  </div>
+                </div>
+            </div>
+
+        </div>
+       
+        
+    </div>
+    
+          <!--col-12-div ends here-->         
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <!--<script src="js/jquery.js"></script>-->
+
+    <!-- Bootstrap Core JavaScript -->
+   <!-- <script src="js/bootstrap.min.js"></script>-->
+
+    <!-- Menu Toggle Script -->
+    <script>
+
+    /*function openhide(){
+      $(".container").hide();
+      $("#wrapper").show();
+    }*/
+	$(document).ready(function(e) {
+        $("#firstPanel").addClass("panel-default_current_background");
+		$('#dateRangePicker')
+        .datepicker({
+            format: 'dd/mm/yyyy',
+            startDate: '01/01/2010',
+            endDate: '12/30/2020'
+        });
+
+      $(".selectall").change(function(){
+      $(".checkbox1").prop('checked', $(this).prop("checked"));
+      })
+    });
+	
+	/*$('.dropdown-menu li > a').click(function(e){
+    $('.btn-default').text(this.innerHTML);
+    alert($('.btn-default').text());
+});*/
+
+	$(document).ready(function(e) {
+        $('#dateRangePicker2')
+        .datepicker({
+            format: 'dd/mm/yyyy',
+            startDate: '01/01/2010',
+            endDate: '12/30/2020'
+        });
+    });
+	
+    $("#").click(function(e) {
+        e.preventDefault();
+		$("#popup").hide();
+        $("#wrapper").toggleClass("toggled");
+    });
+	
+	$("#Icon").click(function(e) {
+        $("#popup").show();
+		$("#configuration").hide();
+		 /*$("#wrapper").toggleClass("toggled");*/
+    });
+	$("#wrapper").click(function(e) {
+       $("#popup").hide(); 
+    });
+	
+  function navigationTR()
+  {
+    $("#sidebar-wrapper").show();
+    $("#configuration").hide();
+    $("#accordion_TR").show();
+    $("#accordion_CG").hide();
+  }
+
+	function navigation()
+	{
+		$("#popup").hide();
+		$("#sidebar-wrapper").hide();
+		$("#configuration").show();
+		$("#accordion_TR").hide();
+		$("#accordion_CG").show();
+	}
+	
+  function navigationCompany()
+  {
+    $("#company").show();
+     $("#User").hide();
+     $("#Entity").hide();
+     $("#company1").addClass('splBackgroundCom');
+      $("#entity1").removeClass('splBackground');
+    $("#user1").removeClass('splBackground');
+  }
+
+	function navigationUser()
+	{
+		$("#company").hide();
+		$("#User").show();
+    $("#Entity").hide();
+		$("#company1").removeClass('splBackgroundCom');
+		$("#user1").addClass('splBackground');
+    $("#entity1").removeClass('splBackground');
+	}
+
+  function navigationEntity()
+  {
+    $("#company").hide();
+    $("#User").hide();
+    $("#Entity").show();
+    $("#company1").removeClass('splBackgroundCom');
+   $("#entity1").addClass('splBackground');
+    $("#user1").removeClass('splBackground');
+  }
+
+  function taxBgColor(){
+    
+     $("#secondPanel").addClass('panel-default_current_background');
+     $("#firstPanel").removeClass('panel-default_current_background');
+     $("#thirdPanel").removeClass('panel-default_current_background');
+     $("#fourthPanel").removeClass('panel-default_current_background');
+  }
+
+  function chartBgcolor() {
+    $("#firstPanel").addClass("panel-default_current_background");
+    $("#secondPanel").removeClass('panel-default_current_background');
+    $("#thirdPanel").removeClass('panel-default_current_background');
+    $("#fourthPanel").removeClass('panel-default_current_background');
+  }
+
+  function contactsBgcolor(){
+    $("#thirdPanel").addClass("panel-default_current_background");
+    $("#firstPanel").removeClass('panel-default_current_background');
+    $("#secondPanel").removeClass('panel-default_current_background');
+    $("#fourthPanel").removeClass('panel-default_current_background');
+  }
+
+  function invoiceBgcolor(){
+    $("#fourthPanel").addClass("panel-default_current_background");
+    $("#firstPanel").removeClass('panel-default_current_background');
+    $("#secondPanel").removeClass('panel-default_current_background');
+    $("#thirdPanel").removeClass('panel-default_current_background');
+  }
+    </script>
+
+</body>
+
+</html>

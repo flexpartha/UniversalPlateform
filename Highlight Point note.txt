@@ -1,0 +1,1 @@
+Note:---in js folder there is a file called tsmData.js which is the main Angularjs file
